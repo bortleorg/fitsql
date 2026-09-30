@@ -1,0 +1,14 @@
+# Local-build override: builds the image from this checkout instead of pulling
+# ghcr.io/bortleorg/fitsql.
+#   docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
+# Or set COMPOSE_FILE=docker-compose.yml:docker-compose.local.yml in .env
+# (use ; instead of : on Windows) so plain `docker compose` commands use it.
+services:
+  web:
+    build: .
+    image: fitsql:local
+    pull_policy: build
+  worker:
+    build: .
+    image: fitsql:local
+    pull_policy: build

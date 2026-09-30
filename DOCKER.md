@@ -23,12 +23,41 @@ and a **Flush** button.
 ## Quick start (docker compose)
 
 ```bash
-docker compose up -d --build          # starts redis + web + 2 workers
+docker compose up -d                  # pulls ghcr.io/bortleorg/fitsql; starts redis + web + worker
 docker compose up -d --scale worker=4 # run more workers
 ```
 
 Then open `http://<host>:8400`. Edit `docker-compose.yml` to point the media
 mount at your library.
+
+### Prebuilt images
+
+GitHub Actions publishes `ghcr.io/bortleorg/fitsql` (linux/amd64):
+
+| Tag | Built from |
+|---|---|
+| `latest` | every push to `main` |
+| `1.2.3`, `1.2` | git tags `v1.2.3` |
+| `sha-abc1234` | every pushed commit |
+
+```bash
+docker pull ghcr.io/bortleorg/fitsql:latest
+```
+
+Update: `docker compose pull && docker compose up -d`. Pin a version with
+`FITSQL_IMAGE=ghcr.io/bortleorg/fitsql:1.2.3` in `.env`.
+
+### Building locally
+
+`docker-compose.local.yml` swaps the registry image for a build of this checkout
+(tagged `fitsql:local`):
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
+```
+
+To make that the default, put `COMPOSE_FILE=docker-compose.yml:docker-compose.local.yml`
+in `.env` (`;` instead of `:` on Windows).
 
 ---
 
@@ -38,7 +67,7 @@ mount at your library.
 
 | Field | Value |
 |---|---|
-| Repository | your built image (e.g. `ghcr.io/youruser/fitsql`) or build locally |
+| Repository | `ghcr.io/bortleorg/fitsql:latest` (or build locally) |
 | Network Type | Bridge |
 | Port | `8400` (host) → `8000` (container) |
 

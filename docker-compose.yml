@@ -1,8 +1,9 @@
 # Host-specific values come from a .env file (copy .env.example -> .env).
 # Defaults below let it run anywhere without one.
 x-app: &app
-  build: .
-  image: fitsql:local
+  # Prebuilt image from GitHub Actions. To build from source instead, add the
+  # override: docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
+  image: ${FITSQL_IMAGE:-ghcr.io/bortleorg/fitsql:latest}
   volumes:
     # Persistent app state: SQLite DB, thumbnails, downloaded ASTAP star DB
     - ${APPDATA_PATH:-./appdata}:/config
