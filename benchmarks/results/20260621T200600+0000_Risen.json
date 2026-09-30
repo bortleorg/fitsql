@@ -1,0 +1,109 @@
+{
+  "env": {
+    "timestamp": "2026-06-21T20:06:00+00:00",
+    "machine": "Risen",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "processor": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+    "cpu_count": 32,
+    "ram_gb": null,
+    "thread_pin": "1",
+    "git_commit": "3b008ee",
+    "git_dirty": false,
+    "versions": {
+      "python": "3.11.7",
+      "numpy": "2.4.6",
+      "astropy": "8.0.0",
+      "sep": "1.4.1",
+      "PIL": "12.2.0"
+    }
+  },
+  "result": {
+    "per_dtype": {
+      "float32": {
+        "read": 0.099,
+        "thumb": 1.414,
+        "wcs": 0.003,
+        "quality": 8.613,
+        "sep_bg": 0.451,
+        "sep_extract": 8.086,
+        "sep_hfr": 0.01,
+        "sky": 0.012,
+        "total": 10.142
+      },
+      "float64": {
+        "read": 0.097,
+        "thumb": 1.538,
+        "wcs": 0.004,
+        "quality": 8.874,
+        "sep_bg": 0.528,
+        "sep_extract": 8.226,
+        "sep_hfr": 0.01,
+        "sky": 0.011,
+        "total": 10.525
+      }
+    },
+    "speedup": {
+      "read": 0.98,
+      "thumb": 1.09,
+      "wcs": 1.33,
+      "quality": 1.03,
+      "sep_bg": 1.17,
+      "sep_extract": 1.02,
+      "sep_hfr": 1.0,
+      "sky": 0.92,
+      "total": 1.04
+    },
+    "runs": 40,
+    "skipped": 0,
+    "errors": 0,
+    "megapixels": 61.2,
+    "comparison": {
+      "per_metric": {
+        "star_count": {
+          "max_rel_pct": 0.1213,
+          "max_abs": 3,
+          "n": 20,
+          "worst_file": "Crescent Nebula and WR 134_O_180.00s_Bin1x1_0052.fits",
+          "tol_pct": 0.5,
+          "flagged": false
+        },
+        "median_hfr": {
+          "max_rel_pct": 0.6539,
+          "max_abs": 0.016422,
+          "n": 20,
+          "worst_file": "Light_NGC 1893_30.0s_IRCUT_20231209-233957.fit",
+          "tol_pct": 1.0,
+          "flagged": false
+        },
+        "median_fwhm": {
+          "max_rel_pct": 1.8275,
+          "max_abs": 0.362806,
+          "n": 20,
+          "worst_file": "Crescent Nebula and WR 134_O_180.00s_Bin1x1_0052.fits",
+          "tol_pct": 1.0,
+          "flagged": true
+        },
+        "eccentricity": {
+          "max_rel_pct": 0.3963,
+          "max_abs": 0.001405,
+          "n": 20,
+          "worst_file": "IC 443_H_-14.80_180.00s_0007.fits",
+          "tol_pct": 1.0,
+          "flagged": false
+        },
+        "background_median": {
+          "max_rel_pct": 0.0,
+          "max_abs": 0.000488,
+          "n": 20,
+          "worst_file": "Light_SH2-190_300.0s_Bin1_20241208-190257_0005.fit",
+          "tol_pct": 1.0,
+          "flagged": false
+        }
+      },
+      "flags": [
+        "median_fwhm: up to 1.8275% diff (tol 1.0%) on Crescent Nebula and WR 134_O_180.00s_Bin1x1_0052.fits"
+      ],
+      "ok": false
+    }
+  }
+}

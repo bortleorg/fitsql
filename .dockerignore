@@ -1,0 +1,21 @@
+# Python
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.db
+backend/*.db-wal
+backend/*.db-shm
+backend/thumbnails/*.jpg
+backend/*.db
+backend/astap_db/
+backend/data/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Misc
+.git/
+.claude/
+*.md
+!backend/requirements.txt

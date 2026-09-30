@@ -1,0 +1,107 @@
+{
+  "env": {
+    "timestamp": "2026-06-21T20:25:26+00:00",
+    "machine": "Risen",
+    "platform": "Windows-10-10.0.22631-SP0",
+    "processor": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+    "cpu_count": 32,
+    "ram_gb": null,
+    "thread_pin": "1",
+    "git_commit": "3fc001e",
+    "git_dirty": true,
+    "versions": {
+      "python": "3.11.7",
+      "numpy": "2.4.6",
+      "astropy": "8.0.0",
+      "sep": "1.4.1",
+      "PIL": "12.2.0"
+    }
+  },
+  "result": {
+    "per_dtype": {
+      "float32": {
+        "read": 0.093,
+        "thumb": 1.42,
+        "wcs": 0.003,
+        "quality": 3.717,
+        "sep_bg": 0.44,
+        "sep_extract": 3.195,
+        "sep_hfr": 0.009,
+        "sky": 0.013,
+        "total": 5.247
+      },
+      "float64": {
+        "read": null,
+        "thumb": null,
+        "wcs": null,
+        "quality": null,
+        "sep_bg": null,
+        "sep_extract": null,
+        "sep_hfr": null,
+        "sky": null,
+        "total": null
+      }
+    },
+    "speedup": {
+      "read": null,
+      "thumb": null,
+      "wcs": null,
+      "quality": null,
+      "sep_bg": null,
+      "sep_extract": null,
+      "sep_hfr": null,
+      "sky": null,
+      "total": null
+    },
+    "runs": 20,
+    "skipped": 0,
+    "errors": 0,
+    "megapixels": 61.2,
+    "comparison": {
+      "per_metric": {
+        "star_count": {
+          "max_rel_pct": 0.0,
+          "max_abs": 0.0,
+          "n": 0,
+          "worst_file": null,
+          "tol_pct": 0.5,
+          "flagged": false
+        },
+        "median_hfr": {
+          "max_rel_pct": 0.0,
+          "max_abs": 0.0,
+          "n": 0,
+          "worst_file": null,
+          "tol_pct": 1.0,
+          "flagged": false
+        },
+        "median_fwhm": {
+          "max_rel_pct": 0.0,
+          "max_abs": 0.0,
+          "n": 0,
+          "worst_file": null,
+          "tol_pct": 1.0,
+          "flagged": false
+        },
+        "eccentricity": {
+          "max_rel_pct": 0.0,
+          "max_abs": 0.0,
+          "n": 0,
+          "worst_file": null,
+          "tol_pct": 1.0,
+          "flagged": false
+        },
+        "background_median": {
+          "max_rel_pct": 0.0,
+          "max_abs": 0.0,
+          "n": 0,
+          "worst_file": null,
+          "tol_pct": 1.0,
+          "flagged": false
+        }
+      },
+      "flags": [],
+      "ok": true
+    }
+  }
+}

@@ -1,0 +1,51 @@
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# ── App runtime data ─────────────────────────────────────────────────────────
+# SQLite database (+ WAL/SHM) — generated, never committed
+*.db
+*.db-wal
+*.db-shm
+
+# Generated thumbnails and zoom previews (cache, safe to delete)
+backend/thumbnails/*
+!backend/thumbnails/.gitkeep
+backend/previews/
+
+# Container data volume / downloaded ASTAP star databases
+backend/data/
+backend/astap_db/
+appdata/
+
+# ── Node / frontend ──────────────────────────────────────────────────────────
+node_modules/
+frontend/dist/
+*.local
+
+# Local env overrides (committed: .env.development — required dev config, no secrets)
+.env
+.env.*.local
+.env.local
+.env.production
+
+# ── Editors / OS ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log

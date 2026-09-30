@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+astropy
+numpy
+Pillow
+sep
+lz4
+zstandard
+python-multipart
+redis

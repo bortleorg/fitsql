@@ -1,0 +1,70 @@
+# Host-specific values come from a .env file (copy .env.example -> .env).
+# Defaults below let it run anywhere without one.
+x-app: &app
+  build: .
+  image: fitsql:local
+  volumes:
+    # Persistent app state: SQLite DB, thumbnails, downloaded ASTAP star DB
+    - ${APPDATA_PATH:-./appdata}:/config
+    # Your astrophotography library (read-only). Add subfolders as Watched Paths.
+    - ${MEDIA_PATH:-/mnt/user/astro}:/mnt/astro:ro
+  environment:
+    - REDIS_URL=redis://redis:6379/0
+    - BROWSE_ROOTS=/mnt
+    # Keys for the read-only public API at /api/v1 (empty = no key required)
+    - PUBLIC_API_KEYS=${PUBLIC_API_KEYS:-}
+    # Optional default site / export rewrite (also settable in the UI):
+    # - SITE_LAT=37.5
+    # - SITE_LON=-122.0
+    # - SITE_ELEV=100
+    # - EXPORT_MAP_FROM=/mnt/astro
+    # - EXPORT_MAP_TO=P:\astro
+  restart: unless-stopped
+  # Give a worker time to finish its current file(s) before Docker SIGKILLs it on
+  # stop / scale-down. Must exceed a single job's runtime (raise if frames are big).
+  stop_grace_period: 90s
+  depends_on:
+    - redis
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: fitsql-redis
+    restart: unless-stopped
+    networks:
+      - internal      # reachable only by web + workers, no host port, no internet
+    # Queue is ephemeral by design — no volume needed.
+
+  web:
+    <<: *app
+    container_name: fitsql-web
+    networks:
+      - internal      # talk to redis + workers privately
+      - frontend      # internet (star-DB download) + published port
+    ports:
+      - "${WEB_PORT:-8400}:8000"   # host -> container 8000
+
+  worker:
+    <<: *app
+    command: python worker.py
+    healthcheck:
+      disable: true   # worker has no web server; the image healthcheck is for web
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - BROWSE_ROOTS=/mnt
+      - WORKER_CONCURRENCY=${WORKER_CONCURRENCY:-2}   # concurrent jobs per worker
+    networks:
+      - internal      # only needs redis + the shared /config volume
+    # Scale at runtime: docker compose up -d --scale worker=4
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "${WORKER_CPUS:-2.0}"   # hard CPU ceiling per worker — never starves the NAS
+          memory: ${WORKER_MEM:-3g}     # cap to avoid OOM on big frames
+
+networks:
+  internal:
+    internal: true    # no gateway — isolated from host and the internet
+  frontend:
+    driver: bridge
